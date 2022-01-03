@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  nuxt3:
+    image: "${NUXT3_IMAGE_NAME:-nuxt3}:${NUXT3_IMAGE_TAG:-latest}"
+    build:
+      context: nuxt3-01
+      dockerfile: Dockerfile
+      target: ${NUXT3_BUILD_TARGET:-development}
+    ports:
+      - "3000:3000"
+    environment:
+      HOST: 0.0.0.0
+    volumes:
+      - ./nuxt3-01/app.vue:/app/app.vue
+    command: >
+      sh -c "yarn dev -o"
